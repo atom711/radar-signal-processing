@@ -1,7 +1,7 @@
 # Fundamentals of Radar Signal Processing: Pulse Compression & Baseband Architectures
 
 ## 1. The Physics of Time and Space (Seconds to Meters)
-* **The Conversion Factor:** Radio waves travel at the speed of light (\(c \approx 3 \times 10^8\) m/s), which translates to exactly **300 meters per microsecond** in the air.
+* **The Conversion Factor:** Radio waves travel at the speed of light (\(c \approx 3 \times 10^8\text{ m/s}\)), which translates to exactly **300 meters per microsecond** in the air.
 * **The Absolute Range Equation:** To find the distance to a single target, we map the round-trip time delay (\(\tau\)) to space. We divide by 2 because the signal travels out and back:
   \[R = \frac{c \cdot \tau}{2}\]
 * **The Range Resolution (\(\Delta R\)) Constraint:** For an unmodulated (pure) pulse, the radar can only separate two targets if their echoes do not overlap in time. Because the pulse must traverse the physical gap between targets twice (out and back), the structural resolution limit of an unmodulated pulse is:
@@ -14,8 +14,8 @@
 * **The Structure:** An LFM chirp is a single, gated burst of energy where the frequency changes linearly over the duration of the pulse.
 * **The Slope Equation:** The rate at which the frequency sweeps is defined by the chirp rate, **K**:
   \[K = \frac{B}{T}\]
-  Where **B** is the modulation bandwidth and **T** is the pulse duration.  
-  *Example:* Sweeping a **20 MHz** bandwidth over a **10 μs** pulse means the frequency accelerates at a rate of **2 MHz per microsecond** (\(2 \times 10^{12}\) Hz/s).
+  Where \(B\) is the modulation bandwidth and \(T\) is the pulse duration.  
+  *Example:* Sweeping a **20 MHz** bandwidth over a **10 μs** pulse means the frequency accelerates at a rate of **2 MHz per microsecond** (\(2 \times 10^{12}\text{ Hz/s}\)).
 * **The Purpose:** By adding bandwidth, every individual slice of the pulse gets a unique frequency signature. This allows the receiver to bypass the physical pulse-width restriction, collapsing a long pulse down to a compressed range resolution determined solely by bandwidth: 
   \[\Delta R = \frac{c}{2B}\]
   This shrinks the 1.5 km limit down to just **7.5 meters** using the parameters above.
@@ -23,8 +23,8 @@
 ---
 
 ## 3. Symmetrical Baseband Processing & Time Centering
-* **Zero-Centered Time Vectors:** Defining the pulse vector locally from **-T/2 to +T/2** places \(t = 0\) perfectly in the middle of the pulse. 
-* **Mathematical Symmetries:** Centering time forces the instantaneous phase function (\(\phi = \pi K t^2\)) to be symmetric around zero:
+* **Zero-Centered Time Vectors:** Defining the pulse vector locally from \(-T/2\) to \(+T/2\) places \(t = 0\) perfectly in the middle of the pulse. 
+* **Mathematical Symmetries:** Centering time forces the instantaneous phase function (\(\phi(t) = \pi K t^2\)) to be symmetric around zero:
   * **Real Part (I Channel):** \(\cos(\pi K t^2)\) becomes a perfectly **even function** (\(f(t) = f(-t)\)).
   * **Imaginary Part (Q Channel):** \(\sin(\pi K t^2)\) becomes a perfectly **odd function** (\(f(-t) = -f(t)\)).
 * **Fourier Impact:** In Fourier theory, a signal with an even real component and an odd imaginary component yields a **purely real-valued frequency spectrum**. This symmetry removes messy linear phase ramps, preventing artificial phase-wrapping distortions when processing data matrices.
@@ -46,7 +46,7 @@
   h = np.conj(tx_chirp[::-1])
   ```
 * **Convolution ($\ast$) vs. Correlation:** Linear system theory dictates that filtering happens via convolution, which inherently flips the filter array in time ($-\tau$). The slicing syntax **`[::-1]`** pre-flips our template so that the convolution engine flips it back into its correct forward-facing orientation. This ensures the frequency sweep profiles align perfectly as they slide across one another.
-* **Phase Flattening:** The complex conjugate (**`np.conj()`**) flips the sign of the imaginary channel. When the incoming reflection meets this conjugated filter, their phases subtract:
+* **Phase Flattening:** The complex conjugate (`np.conj()`) flips the sign of the imaginary channel. When the incoming reflection meets this conjugated filter, their phases subtract:
   $$\exp(j \pi K t^2) \times \exp(-j \pi K t^2) = \exp(j0) = 1$$
   This flattens the rapidly wrapping phase across the entire 10 μs window. Instead of canceling itself out, the energy across all samples sums constructively, transforming a wide, low-amplitude return into a sharp, high-intensity range spike.
 
@@ -54,6 +54,6 @@
 
 ## 6. What is Pulse Compression in this Context?
 In a functional radar script, pulse compression is the mathematical conversion of a long, low-power spatial smear of energy into a single, localized, high-SNR tracking spike:
-* **Energy Concentrator:** The raw target reflection is spread across 1,000 digitized data samples (10 μs duration × 100 MHz sampling rate). The matched filter gathers the scattered phase energy across all 1,000 bins and packs it into a single high-amplitude sample spike at index 400.
+* **Energy Concentrator:** The raw target reflection is spread across 1,000 digitized data samples (10 μs duration $\times$ 100 MHz sampling rate). The matched filter gathers the scattered phase energy across all 1,000 bins and packs it into a single high-amplitude sample spike at index 400.
 * **SNR Booster:** White noise is completely uncorrelated and cannot compress, so the noise floor remains flat. The structured target phase, however, perfectly matches the filter template. This creates a massive power amplification (Processing Gain) at the peak, pulling weak echoes out from under the noise floor.
 * **Resolution Liberator:** It unties radar resolution from pulse duration. It allows the system to use long pulses to send high energy out into space (for maximum range tracking), while maintaining the tight, razor-sharp range resolution (7.5 meters) typically only possible with short pulses.
