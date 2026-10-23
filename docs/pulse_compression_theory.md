@@ -27,7 +27,7 @@ This shrinks the 1.5 km limit down to just **7.5 meters** using the parameters a
 ## 3. Symmetrical Baseband Processing & Time Centering
 
 * **Zero-Centered Time Vectors:** Defining the pulse vector locally from $\(-T/2\) to \(+T/2\$) places $\(t = 0\$) perfectly in the middle of the pulse.
-* **Mathematical Symmetries:** Centering time forces the instantaneous phase function (\(\phi(t) = \pi K t^2\)) to be symmetric around zero:
+* **Mathematical Symmetries:** Centering time forces the instantaneous phase function ($\phi(t) = \pi K t^2\$) to be symmetric around zero:
   * **Real Part (I Channel):** $\(\cos(\pi K t^2)\$) becomes a perfectly **even function** ($\(f(t) = f(-t)\$)).
   * **Imaginary Part (Q Channel):** $\(\sin(\pi K t^2)\$) becomes a perfectly **odd function** ($\(f(-t) = -f(t)\$)).
 * **Fourier Impact:** In Fourier theory, a signal with an even real component and an odd imaginary component yields a **purely real-valued frequency spectrum**. This symmetry removes messy linear phase ramps, preventing artificial phase-wrapping distortions when processing data matrices.
