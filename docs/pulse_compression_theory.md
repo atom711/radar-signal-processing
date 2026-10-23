@@ -52,7 +52,7 @@ h = np.conj(tx_chirp[::-1])
 ```
 * **Convolution ($\ast$) vs. Correlation:** Linear system theory dictates that filtering happens via convolution, which inherently flips the filter array in time ($-\tau$). The slicing syntax **`[::-1]`** pre-flips our template so that the convolution engine flips it back into its correct forward-facing orientation. This ensures the frequency sweep profiles align perfectly as they slide across one another.
 * **Phase Flattening:** The complex conjugate (`np.conj()`) flips the sign of the imaginary channel. When the incoming reflection meets this conjugated filter, their phases subtract:
-$$\exp(j \pi K t^2) \times \exp(-j \pi K t^2) = \exp(j0) = 1$$
+$$ \exp(j \pi K t^2) \times \exp(-j \pi K t^2) = \exp(j0) = 1 $$
 This flattens the rapidly wrapping phase across the entire 10 μs window. Instead of canceling itself out, the energy across all samples sums constructively, transforming a wide, low-amplitude return into a sharp, high-intensity range spike.
 
 ---
