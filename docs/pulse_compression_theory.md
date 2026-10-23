@@ -22,6 +22,16 @@
 
 ---
 
+## 3. Symmetrical Baseband Processing & Time Centering
+* **Zero-Centered Time Vectors:** Defining the pulse vector locally from \(-T/2\) to \(+T/2\) places \(t = 0\) perfectly in the middle of the pulse. 
+* **Mathematical Symmetries:** Centering time forces the instantaneous phase function (\(\phi(t) = \pi K t^2\)) to be symmetric around zero:
+  * **Real Part (I Channel):** \(\cos(\pi K t^2)\) becomes a perfectly **even function** (\(f(t) = f(-t)\)).
+  * **Imaginary Part (Q Channel):** \(\sin(\pi K t^2)\) becomes a perfectly **odd function** (\(f(-t) = -f(t)\)).
+* **Fourier Impact:** In Fourier theory, a signal with an even real component and an odd imaginary component yields a **purely real-valued frequency spectrum**. This symmetry removes messy linear phase ramps, preventing artificial phase-wrapping distortions when processing data matrices.
+* **Baseband:** Baseband refers to the raw signal shifted down to sit symmetrically around **0 Hz**. Operating at baseband means our 20 MHz chirp sweeps cleanly from -10 MHz to +10 MHz (\(-B/2\) to \(+B/2\)).
+
+---
+
 ## 4. Direct Conversion Hardware & Slower ADCs
 * **The I/Q Demodulator Circuit:** The physical radar hardware strips away the high-frequency RF carrier wave (e.g., 10 GHz) using **analog frequency mixers**. The incoming echo is multiplied by an internal Local Oscillator reference tone (\(\cos\)) and a 90-degree phase-shifted version (\(\sin\)).
 * **Frequency Subtraction:** Multiplication physically generates sum and difference frequencies. The high-frequency sums are filtered out, leaving the difference frequency (\(\text{Signal} - \text{Carrier}\)), which drops the spectrum right down to the centered baseband window.
@@ -37,7 +47,7 @@
   ```
 * **Convolution ($\ast$) vs. Correlation:** Linear system theory dictates that filtering happens via convolution, which inherently flips the filter array in time ($-\tau$). The slicing syntax **`[::-1]`** pre-flips our template so that the convolution engine flips it back into its correct forward-facing orientation. This ensures the frequency sweep profiles align perfectly as they slide across one another.
 * **Phase Flattening:** The complex conjugate (`np.conj()`) flips the sign of the imaginary channel. When the incoming reflection meets this conjugated filter, their phases subtract:
-  $$\exp(j \pi K t^2) \times \exp(-j \pi K t^2) = \exp(j0) = 1$$
+$$ \exp(j \pi K t^2) \times \exp(-j \pi K t^2) = \exp(j0) = 1 $$
   This flattens the rapidly wrapping phase across the entire 10 μs window. Instead of canceling itself out, the energy across all samples sums constructively, transforming a wide, low-amplitude return into a sharp, high-intensity range spike.
 
 ---
