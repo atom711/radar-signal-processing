@@ -3,9 +3,9 @@
 ## 1. The Physics of Time and Space (Seconds to Meters)
 
 * **The Conversion Factor:** Radio waves travel at the speed of light ($\(c \approx 3 \times 10^8\$) m/s), which translates to exactly **300 meters per microsecond** in the air.
-* **The Absolute Range Equation:** To find the distance to a single target, we map the round-trip time delay ($\(\tau\$)) to space. We divide by 2 because the signal travels out and back:
+* **The Absolute Range Equation:** To find the distance to a single target, we map the round-trip time delay ($\tau\$) to space. We divide by 2 because the signal travels out and back:
 $\[R = \frac{c \cdot \tau}{2}\$]
-* **The Range Resolution (\(\Delta R\)) Constraint:** For an unmodulated (pure) pulse, the radar can only separate two targets if their echoes do not overlap in time. Because the pulse must traverse the physical gap between targets twice (out and back), the structural resolution limit of an unmodulated pulse is:
+* **The Range Resolution ($\(\Delta R\$)) Constraint:** For an unmodulated (pure) pulse, the radar can only separate two targets if their echoes do not overlap in time. Because the pulse must traverse the physical gap between targets twice (out and back), the structural resolution limit of an unmodulated pulse is:
 $$\[\Delta R = \frac{c \cdot \tau}{2}\$$]
 *Example:* A **10 μs** unmodulated pulse physically spans **3 km** in the air. Without modulation, your range resolution is stuck at a massive **1.5 km**.
 
@@ -39,7 +39,7 @@ This shrinks the 1.5 km limit down to just **7.5 meters** using the parameters a
 
 * **The I/Q Demodulator Circuit:** The physical radar hardware strips away the high-frequency RF carrier wave (e.g., 10 GHz) using **analog frequency mixers**. The incoming echo is multiplied by an internal Local Oscillator reference tone ($\(\cos\$)) and a 90-degree phase-shifted version ($\(\sin\$)).
 * **Frequency Subtraction:** Multiplication physically generates sum and difference frequencies. The high-frequency sums are filtered out, leaving the difference frequency ($\(\text{Signal} - \text{Carrier}\$)), which drops the spectrum right down to the centered baseband window.
-* **The Complex Nyquist Rate:** For a real-valued signal, the sampling rate must be $\(2 \times f_{\max}\$). But because complex I/Q sampling tracks two independent dimensions simultaneously, the complex Nyquist boundary drops to exactly equal the bandwidth ($(f_s = B\$)).
+* **The Complex Nyquist Rate:** For a real-valued signal, the sampling rate must be $\(2 \times f_{\max}\$). But because complex I/Q sampling tracks two independent dimensions simultaneously, the complex Nyquist boundary drops to exactly equal the bandwidth ($\(f_s = B\$)).
 * **Hardware Advantage:** By centering the spectrum at $\(\pm B/2\$), the maximum frequency component drops to 10 MHz. The system routes the signal into **two slower, parallel ADCs** running at 20 MHz rather than forcing a single, expensive real-valued ADC to run at 40 MHz. Slower ADC clocks provide higher dynamic range, less thermal noise, and lower component costs.
 
 ---
