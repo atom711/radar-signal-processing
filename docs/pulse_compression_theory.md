@@ -39,7 +39,7 @@ This shrinks the 1.5 km limit down to just **7.5 meters** using the parameters a
 
 * **The I/Q Demodulator Circuit:** The physical radar hardware strips away the high-frequency RF carrier wave (e.g., 10 GHz) using **analog frequency mixers**. The incoming echo is multiplied by an internal Local Oscillator reference tone ($\\cos$) and a 90-degree phase-shifted version ($\sin$).
 * **Frequency Subtraction:** Multiplication physically generates sum and difference frequencies. The high-frequency sums are filtered out, leaving the difference frequency ($\text{Signal} - \text{Carrier}$), which drops the spectrum right down to the centered baseband window.
-* **The Complex Nyquist Rate:** For a real-valued signal, the sampling rate must be $\(2 \times f_{\max}\$). But because complex I/Q sampling tracks two independent dimensions simultaneously, the complex Nyquist boundary drops to exactly equal the bandwidth ($\(f_s = B\$)).
+* **The Complex Nyquist Rate:** For a real-valued signal, the sampling rate must be $\(2 \times f_{\max}\$). But because complex I/Q sampling tracks two independent dimensions simultaneously, the complex Nyquist boundary drops to exactly equal the bandwidth $\(f_s = B\)$.
 * **Hardware Advantage:** By centering the spectrum at $\(\pm B/2\$), the maximum frequency component drops to 10 MHz. The system routes the signal into **two slower, parallel ADCs** running at 20 MHz rather than forcing a single, expensive real-valued ADC to run at 40 MHz. Slower ADC clocks provide higher dynamic range, less thermal noise, and lower component costs.
 
 ---
@@ -52,7 +52,7 @@ h = np.conj(tx_chirp[::-1])
 ```
 * **Convolution ($\ast$) vs. Correlation:** Linear system theory dictates that filtering happens via convolution, which inherently flips the filter array in time ($-\tau$). The slicing syntax **`[::-1]`** pre-flips our template so that the convolution engine flips it back into its correct forward-facing orientation. This ensures the frequency sweep profiles align perfectly as they slide across one another.
 * **Phase Flattening:** The complex conjugate (`np.conj()`) flips the sign of the imaginary channel. When the incoming reflection meets this conjugated filter, their phases subtract:
-   $ \exp(j \pi K t^2) \times \exp(-j \pi K t^2) = \exp(j0) = 1 $
+   $\exp(j \pi K t^2) \times \exp(-j \pi K t^2) = \exp(j0) = 1$
 This flattens the rapidly wrapping phase across the entire 10 μs window. Instead of canceling itself out, the energy across all samples sums constructively, transforming a wide, low-amplitude return into a sharp, high-intensity range spike.
 
 ---
