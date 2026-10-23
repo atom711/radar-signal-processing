@@ -2,7 +2,7 @@
 
 ## 1. The Physics of Time and Space (Seconds to Meters)
 
-* **The Conversion Factor:** Radio waves travel at the speed of light ($\c \approx 3 \times 10^8\$ m/s), which translates to exactly **300 meters per microsecond** in the air.
+* **The Conversion Factor:** Radio waves travel at the speed of light ($\c approx 3 \times 10^8\$ m/s), which translates to exactly **300 meters per microsecond** in the air.
 * **The Absolute Range Equation:** To find the distance to a single target, we map the round-trip time delay ($\tau\$) to space. We divide by 2 because the signal travels out and back:
 $\[R = \frac{c \cdot \tau}{2}\$]
 * **The Range Resolution ($\Delta R\$) Constraint:** For an unmodulated (pure) pulse, the radar can only separate two targets if their echoes do not overlap in time. Because the pulse must traverse the physical gap between targets twice (out and back), the structural resolution limit of an unmodulated pulse is:
