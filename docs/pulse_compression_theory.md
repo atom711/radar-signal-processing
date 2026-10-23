@@ -6,7 +6,7 @@
 * **The Absolute Range Equation:** To find the distance to a single target, we map the round-trip time delay (\(\tau\)) to space. We divide by 2 because the signal travels out and back:
 \[R = \frac{c \cdot \tau}{2}\]
 * **The Range Resolution (\(\Delta R\)) Constraint:** For an unmodulated (pure) pulse, the radar can only separate two targets if their echoes do not overlap in time. Because the pulse must traverse the physical gap between targets twice (out and back), the structural resolution limit of an unmodulated pulse is:
-\[Delta R = \frac{c \cdot \tau}{2}\]
+\[\Delta R = \frac{c \cdot \tau}{2}\]
 *Example:* A **10 μs** unmodulated pulse physically spans **3 km** in the air. Without modulation, your range resolution is stuck at a massive **1.5 km**.
 
 ---
