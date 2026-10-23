@@ -1,7 +1,7 @@
 # Fundamentals of Radar Signal Processing: Pulse Compression & Baseband Architectures
 
 ## 1. The Physics of Time and Space (Seconds to Meters)
-* **The Conversion Factor:** Radio waves travel at the speed of light (\(c \approx 3 \times 10^8\text{ m/s}\)), which translates to exactly **300 meters per microsecond** in the air.
+* **The Conversion Factor:** Radio waves travel at the speed of light (\(c \approx 3 \times 10^8\) m/s), which translates to exactly **300 meters per microsecond** in the air.
 * **The Absolute Range Equation:** To find the distance to a single target, we map the round-trip time delay (\(\tau\)) to space. We divide by 2 because the signal travels out and back:
   \[R = \frac{c \cdot \tau}{2}\]
 * **The Range Resolution (\(\Delta R\)) Constraint:** For an unmodulated (pure) pulse, the radar can only separate two targets if their echoes do not overlap in time. Because the pulse must traverse the physical gap between targets twice (out and back), the structural resolution limit of an unmodulated pulse is:
@@ -15,7 +15,7 @@
 * **The Slope Equation:** The rate at which the frequency sweeps is defined by the chirp rate, **K**:
   \[K = \frac{B}{T}\]
   Where \(B\) is the modulation bandwidth and \(T\) is the pulse duration.  
-  *Example:* Sweeping a **20 MHz** bandwidth over a **10 μs** pulse means the frequency accelerates at a rate of **2 MHz per microsecond** (\(2 \times 10^{12}\text{ Hz/s}\)).
+  *Example:* Sweeping a **20 MHz** bandwidth over a **10 μs** pulse means the frequency accelerates at a rate of **2 MHz per microsecond** (\(2 \times 10^{12}\) Hz/s).
 * **The Purpose:** By adding bandwidth, every individual slice of the pulse gets a unique frequency signature. This allows the receiver to bypass the physical pulse-width restriction, collapsing a long pulse down to a compressed range resolution determined solely by bandwidth: 
   \[\Delta R = \frac{c}{2B}\]
   This shrinks the 1.5 km limit down to just **7.5 meters** using the parameters above.
@@ -28,7 +28,7 @@
   * **Real Part (I Channel):** \(\cos(\pi K t^2)\) becomes a perfectly **even function** (\(f(t) = f(-t)\)).
   * **Imaginary Part (Q Channel):** \(\sin(\pi K t^2)\) becomes a perfectly **odd function** (\(f(-t) = -f(t)\)).
 * **Fourier Impact:** In Fourier theory, a signal with an even real component and an odd imaginary component yields a **purely real-valued frequency spectrum**. This symmetry removes messy linear phase ramps, preventing artificial phase-wrapping distortions when processing data matrices.
-* **Baseband:** Baseband refers to the raw signal shifted down to sit symmetrically around **0 Hz**. Operating at baseband means our 20 MHz chirp sweeps cleanly from **-10 MHz to +10 MHz** (\(-B/2\) to \(+B/2\)).
+* **Baseband:** Baseband refers to the raw signal shifted down to sit symmetrically around **0 Hz**. Operating at baseband means our 20 MHz chirp sweeps cleanly from \(-10\) MHz to \(+10\) MHz (\(-B/2\) to \(+B/2\)).
 
 ---
 
