@@ -17,7 +17,7 @@ $$\[\Delta R = \frac{c \cdot \tau}{2}\$$]
 * **The Slope Equation:** The rate at which the frequency sweeps is defined by the chirp rate, **K**:
 $\[K = \frac{B}{T}\$]
 Where \(B\) is the modulation bandwidth and \(T\) is the pulse duration.
-*Example:* Sweeping a **20 MHz** bandwidth over a **10 μs** pulse means the frequency accelerates at a rate of **2 MHz per microsecond** ($\(2 \times 10^{12}\$) Hz/s).
+*Example:* Sweeping a **20 MHz** bandwidth over a **10 μs** pulse means the frequency accelerates at a rate of **2 MHz per microsecond** ($\2 \times 10^{12}\$ Hz/s).
 * **The Purpose:** By adding bandwidth, every individual slice of the pulse gets a unique frequency signature. This allows the receiver to bypass the physical pulse-width restriction, collapsing a long pulse down to a compressed range resolution determined solely by bandwidth:
 $\[\Delta R = \frac{c}{2B}\$]
 This shrinks the 1.5 km limit down to just **7.5 meters** using the parameters above.
